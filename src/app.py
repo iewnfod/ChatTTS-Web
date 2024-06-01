@@ -4,8 +4,10 @@ import os
 
 app = Flask(__name__)
 
+project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 static_dir = os.path.join(
-	os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+	project_dir,
 	'frontend',
 	'dist'
 )
@@ -29,5 +31,13 @@ def assets(p):
 		return send_file(f)
 	else:
 		return f'assets/{p} not exist', 404
+
+@app.route('/audio/<uid>')
+def audio(uid):
+	f = os.path.join(project_dir, 'dist', f'{uid}.wav')
+	if os.path.exists(f):
+		return send_file(f)
+	else:
+		return f'audio/{uid} not exist', 404
 
 app.register_blueprint(api)

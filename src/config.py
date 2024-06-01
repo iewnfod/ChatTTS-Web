@@ -11,7 +11,7 @@ class BasicConfig:
 class ChatConfig:
 	def __init__(self, config):
 		self.timbre_type = config['timbre_type']
-		self.model_save_path = config['model_save_path']
+		self.model_save_dir = config['model_save_dir']
 
 	def update(self, config):
 		self = ChatConfig(config)

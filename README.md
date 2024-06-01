@@ -1,4 +1,4 @@
-# ChatTTS Test
+# ChatTTS Web
 
 This is a script to help you experience basic functions of [`ChatTTS`](https://github.com/2noise/ChatTTS) easily.
 

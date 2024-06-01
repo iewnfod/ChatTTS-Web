@@ -15,10 +15,9 @@ def display_audio(audios, texts = None):
 		if texts: print("\n" + texts[i])
 		display(audios[i])
 
-def save_audios(audios):
-	for i in range(len(audios)):
-		with open(os.path.join(audio_save_dir, f'part{i+1}.wav'), 'wb') as f:
-			f.write(audios[i].data)
+def save_audio(audio, name):
+	with open(os.path.join(audio_save_dir, f'{name}.wav'), 'wb') as f:
+		f.write(audio.data)
 
 def solve_texts(texts):
 	t = []

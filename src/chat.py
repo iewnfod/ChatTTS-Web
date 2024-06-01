@@ -12,9 +12,9 @@ class MyChat:
 		self.timbres = ["Random"]
 		self.timbre_type = chat_config.timbre_type
 		self.chat = ChatTTS.Chat()
-		chat.load_models(
+		self.chat.load_models(
 			source = "local",
-			local_path = os.path.join(chat_config.model_save_path, 'ChatTTS'),
+			local_path = os.path.join(chat_config.model_save_dir, 'ChatTTS'),
 			compile = True,
 			device = self.device
 		)
@@ -67,6 +67,7 @@ class MyChat:
 		)
 
 		uid = uuid.uuid4()
-		save_audios(audios=get_audios(wavs))
+		save_audio(audio=get_audios(wavs)[0], name=uid)
+		return uid
 
 chat = MyChat()
