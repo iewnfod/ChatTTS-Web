@@ -3,11 +3,13 @@ import toml
 config_path = "config.toml"
 
 def save_config():
+	d = {
+		"basic": vars(basic_config),
+		"chat": vars(chat_config)
+	}
+	print(f'Save Config: ${d}')
 	with open(config_path, 'w') as f:
-		f.write(toml.dumps({
-			"basic": vars(basic_config),
-			"chat": vars(chat_config)
-		}))
+		f.write(toml.dumps(d))
 
 class BasicConfig:
 	def __init__(self, config):

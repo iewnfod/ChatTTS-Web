@@ -1,9 +1,10 @@
 import ChatTTS
 from src.functions import *
 import torch
-from src.config import chat_config, basic_config
+from src.config import chat_config, basic_config, save_config
 import os
 import uuid
+from modelscope import snapshot_download
 
 class MyChat:
 	def __init__(self):
@@ -17,8 +18,18 @@ class MyChat:
 			device = self.device
 		)
 
+	def download_model(self):
+		if os.path.exists(basic_config.model_save_dir):
+			return
+		print(f'Model not exist at {basic_config.model_save_dir}\nTry to download')
+		model_dir = snapshot_download('Iewnfod/ChatTTS-Model', cache_dir=basic_config.model_save_dir)
+		basic_config.model_save_dir = model_dir
+		save_config()
+
 	def _init_torch(self):
 		print(f"Torch Version {torch.__version__}")
+
+		self.download_model()
 
 		std, mean = torch.load(os.path.join(basic_config.model_save_dir, 'ChatTTS', 'asset', 'spk_stat.pt')).chunk(2)
 

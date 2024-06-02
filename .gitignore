@@ -4,3 +4,4 @@ models/
 __pycache__/
 dist/
 !frontend/dist
+ChatTTS-Model/

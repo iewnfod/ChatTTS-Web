@@ -7,7 +7,8 @@ packages = [
 	('IPython', 'IPython'),
 	('chattts-fork', 'ChatTTS'),
 	('toml', 'toml'),
-	('flask', 'flask')
+	('flask', 'flask'),
+	('modelscope', 'modelscope')
 ]
 
 def test_requirements():
