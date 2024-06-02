@@ -95,7 +95,7 @@ export default function MainPage({
             <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: 3, height: "50vh" }}>
                 <Textarea
                     minRows={2}
-                    sx={{width: "50%", height: "100%", borderRadius: 10}}
+                    sx={{width: "50%", height: "100%", borderRadius: 10, p: 2}}
                     placeholder="输入一些内容吧 Type something here..."
                     value={t}
                     onChange={e => setT(e.target.value)}

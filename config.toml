@@ -1,7 +1,7 @@
 [basic]
 host = "127.0.0.1"
 port = 5000
-model_save_dir = "./models"
+model_save_dir = "../ChatTTS-Model"
 
 [chat]
 timbre_type = "random"

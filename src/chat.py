@@ -20,7 +20,7 @@ class MyChat:
 	def _init_torch(self):
 		print(f"Torch Version {torch.__version__}")
 
-		std, mean = torch.load('./models/ChatTTS/asset/spk_stat.pt').chunk(2)
+		std, mean = torch.load(os.path.join(basic_config.model_save_dir, 'ChatTTS', 'asset', 'spk_stat.pt')).chunk(2)
 
 		# 空字符串为随机，将会保存在 rand.pt 中
 		# 否则调用预设
