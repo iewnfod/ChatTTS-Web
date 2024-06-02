@@ -2,6 +2,7 @@ import {Box} from "@mui/joy";
 import NavBar from "./components/NavBar.tsx";
 import MainPage from "./components/MainPage.tsx";
 import {useEffect, useState} from "react";
+import {Toaster} from "react-hot-toast";
 
 function App() {
     const [audioList, setAudioList] = useState<Array<string>>([]);
@@ -16,6 +17,7 @@ function App() {
 
     return (
         <Box sx={{display: "flex", flexDirection: "column"}}>
+            <Toaster/>
             <NavBar/>
             <MainPage audioList={audioList} setAudioList={setAudioList}/>
         </Box>

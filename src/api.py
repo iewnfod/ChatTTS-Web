@@ -4,6 +4,7 @@ from flask import request
 import os
 from src.chat import chat
 import json
+from src.functions import *
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
@@ -15,15 +16,11 @@ def index():
 def get_config():
     return vars(chat_config)
 
-@api.route('/set_config', methods=['POST'])
-def set_config():
-    data = request.get_json()
-    chat_config.update(data)
-    return 'Config updated successfully'
-
 @api.route('/get_audio_list')
 def get_audio_list():
-    filenames = os.listdir('dist')
+    if not os.path.exists(audio_save_dir):
+        os.makedirs(audio_save_dir)
+    filenames = os.listdir(audio_save_dir)
     arr = []
     for n in filenames:
         if n.endswith('.wav'):
@@ -32,7 +29,17 @@ def get_audio_list():
 
 @api.route('/new_chat', methods=['POST'])
 def new_chat():
-    text = json.loads(request.get_data())['text']
-    uid = chat.new_chat(text=text)
-    print(uid)
+    data = json.loads(request.get_data())
+    text = data['text']
+    new_chat_config = data['new_chat_config']
+    uid = chat.new_chat(text=text, new_chat_config=new_chat_config)
     return {'uid': str(uid)}
+
+@api.route('/remove_chat/<uid>')
+def remove_chat(uid):
+    u = chat.remove_chat(uid)
+    return {'uid': u}
+
+@api.route('/get_audio_text/<uid>')
+def get_audio_text(uid):
+    return {'text': get_text_from_uid(uid)}

@@ -1,7 +1,8 @@
 [basic]
 host = "127.0.0.1"
 port = 5000
+model_save_dir = "./models"
 
 [chat]
-model_save_dir = "./models"
-timbre_type = "female"
+timbre_type = "random"
+prompt = "[oral_2][laugh_0][break_6]"

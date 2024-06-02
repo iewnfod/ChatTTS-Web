@@ -3,4 +3,4 @@ models/
 .venv/
 __pycache__/
 dist/
-!chatts-frontend/dist
+!frontend/dist

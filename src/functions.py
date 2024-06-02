@@ -15,9 +15,14 @@ def display_audio(audios, texts = None):
 		if texts: print("\n" + texts[i])
 		display(audios[i])
 
-def save_audio(audio, name):
+def save_audio(audio, text, name):
+	if not os.path.exists(audio_save_dir):
+		os.makedirs(audio_save_dir)
+
 	with open(os.path.join(audio_save_dir, f'{name}.wav'), 'wb') as f:
 		f.write(audio.data)
+	with open(os.path.join(audio_save_dir, f'{name}.txt'), 'w') as f:
+		f.write(text)
 
 def solve_texts(texts):
 	t = []
@@ -31,3 +36,11 @@ def solve_texts(texts):
 			.replace('!', '. ')
 		)
 	return t
+
+def get_text_from_uid(uid):
+	with open(os.path.join(audio_save_dir, f'{uid}.txt'), 'r') as f:
+		return f.read()
+
+def remove_audio(uid):
+	os.remove(os.path.join(audio_save_dir, f'{uid}.wav'))
+	os.remove(os.path.join(audio_save_dir, f'{uid}.txt'))
