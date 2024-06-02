@@ -5,7 +5,8 @@ This is a script to help you experience basic functions of [`ChatTTS`](https://g
 ## Requirements
 * Python >= 3.10
 * venv (optional)
-* git
+* Git
+* Git LFS
 
 ## Usage
 1. Clone the project
