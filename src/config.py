@@ -16,6 +16,7 @@ class BasicConfig:
 		self.host = config['host']
 		self.port = config['port']
 		self.model_save_dir = config['model_save_dir']
+		self.model_source = config['model_source']
 
 	def update(self, config):
 		self.__dict__ = BasicConfig(config).__dict__

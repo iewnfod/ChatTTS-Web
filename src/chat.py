@@ -4,7 +4,8 @@ import torch
 from src.config import chat_config, basic_config, save_config
 import os
 import uuid
-from modelscope import snapshot_download
+import modelscope
+import huggingface_hub
 
 class MyChat:
 	def __init__(self):
@@ -22,7 +23,14 @@ class MyChat:
 		if os.path.exists(basic_config.model_save_dir):
 			return
 		print(f'Model not exist at {basic_config.model_save_dir}\nTry to download')
-		model_dir = snapshot_download('Iewnfod/ChatTTS-Model', cache_dir=basic_config.model_save_dir)
+		if basic_config.model_source == 'huggingface':
+			download = huggingface_hub.snapshot_download
+		elif basic_config.model_source == 'modelscope':
+			download = modelscope.snapshot_download
+		else:
+			print('Unknown Model Source')
+			return
+		model_dir = download('Iewnfod/ChatTTS-Model', cache_dir=basic_config.model_save_dir)
 		basic_config.model_save_dir = model_dir
 		save_config()
 
