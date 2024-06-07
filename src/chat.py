@@ -30,7 +30,7 @@ class MyChat:
 		else:
 			print('Unknown Model Source')
 			return
-		model_dir = download('Iewnfod/ChatTTS-Model', cache_dir=basic_config.model_save_dir)
+		model_dir = download('iewnfod/chattts-model', cache_dir=basic_config.model_save_dir)
 		basic_config.model_save_dir = model_dir
 		save_config()
 
@@ -39,7 +39,12 @@ class MyChat:
 
 		self.download_model()
 
-		std, mean = torch.load(os.path.join(basic_config.model_save_dir, 'ChatTTS', 'asset', 'spk_stat.pt')).chunk(2)
+		try:
+			std, mean = torch.load(os.path.join(basic_config.model_save_dir, 'ChatTTS', 'asset', 'spk_stat.pt')).chunk(2)
+		except FileNotFoundError:
+			print(f"No speaker stat file found in {basic_config.model_save_dir}")
+			print(f"Please remove the model save dir and try again")
+			return
 
 		# 空字符串为随机，将会保存在 rand.pt 中
 		# 否则调用预设
